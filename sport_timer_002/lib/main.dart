@@ -177,7 +177,7 @@ class MainPage extends StatelessWidget {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text('Invalid Input'),
-                            content: const Text('123Please enter valid values.'),
+                            content: const Text('Please enter valid values.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
