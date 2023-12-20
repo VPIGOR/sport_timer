@@ -127,7 +127,7 @@ class MainPage extends StatelessWidget {
                       fontSize: 30,
                     ),
                     decoration: const InputDecoration(
-                      labelText: 'cCycles(times)',
+                      labelText: 'Cycles(times)',
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       labelStyle: TextStyle(
                         fontSize: 24,
