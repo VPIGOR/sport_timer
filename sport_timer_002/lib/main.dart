@@ -98,7 +98,7 @@ class MainPage extends StatelessWidget {
                       fontSize: 30,
                     ),
                     decoration: const InputDecoration(
-                      labelText: 'BBreaking(seconds)',
+                      labelText: 'Breaking(seconds)',
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       labelStyle: TextStyle(
                         fontSize: 24,
