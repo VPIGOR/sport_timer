@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'timer_model.dart';
-// import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class TrainingPage extends StatefulWidget {
   final int trainingTime;
@@ -115,14 +115,12 @@ class TimerDisplay extends StatelessWidget {
             : timerModel.restTimeInSeconds);
 
         Color backgroundColor =
-            timerModel.isTraining ? Colors.black : Colors.lightBlueAccent;
-
+            timerModel.isTraining ? const Color.fromARGB(255, 251, 251, 250) : const Color.fromARGB(255, 7, 1, 26);
         // Play beep sound in the last two seconds of training and last second of rest
-        if (timerModel.isTraining &&
-            timerModel.trainingTimeInSeconds == 1) {
+        if (timerModel.trainingTimeInSeconds == 1) {
           _playBeep();
-        } else if (!timerModel.isTraining &&
-            timerModel.restTimeInSeconds == 1) {
+        }
+        if (timerModel.restTimeInSeconds == 1) {
           _playShortBeep();
         }
 
@@ -147,14 +145,13 @@ class TimerDisplay extends StatelessWidget {
     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
-  void _playBeep() {
-    // AudioCache audioCache = AudioCache();
-    // audioCache.play('beep.mp3'); // Replace 'beep.mp3' with your beep sound file
-   // _audioPlayer.play('assets/beep.mp3');
+  void _playBeep() async {
+    final player = AudioPlayer();
+    await player.play(AssetSource('beep1.mp3'));
   }
 
-  void _playShortBeep() {
-    // AudioCache audioCache = AudioCache();
-    // audioCache.play('short_beep.mp3'); // Replace 'short_beep.mp3' with your short beep sound file
+  void _playShortBeep() async {
+    final player = AudioPlayer();
+    await player.play(AssetSource('beep.mp3'));
   }
 }
