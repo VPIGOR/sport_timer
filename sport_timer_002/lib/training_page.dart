@@ -55,6 +55,7 @@ class _TrainingPageState extends State<TrainingPage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
+                  minimumSize: const Size(150, 50),
                 ),
                 onPressed: (!_isStarted && _isPause)
                     ? () {
@@ -73,6 +74,8 @@ class _TrainingPageState extends State<TrainingPage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
+                  minimumSize:
+                      const Size(150, 50), // Set the minimum width and height
                 ),
                 onPressed: !_isPause
                     ? () {
@@ -99,7 +102,7 @@ class TimerDisplay extends StatelessWidget {
   final int restTime;
   final int sets;
 
-  const TimerDisplay({
+   const TimerDisplay({
     super.key,
     required this.trainingTime,
     required this.restTime,
@@ -114,13 +117,12 @@ class TimerDisplay extends StatelessWidget {
             ? timerModel.trainingTimeInSeconds
             : timerModel.restTimeInSeconds);
 
-        Color backgroundColor =
-            timerModel.isTraining ? const Color.fromARGB(255, 251, 251, 250) : const Color.fromARGB(255, 7, 1, 26);
+        Color backgroundColor = timerModel.isTraining
+            ? const Color.fromARGB(255, 251, 251, 250)
+            : const Color.fromARGB(255, 7, 1, 26);
+            
         // Play beep sound in the last two seconds of training and last second of rest
-        if (timerModel.trainingTimeInSeconds == 1) {
-          _playBeep();
-        }
-        if (timerModel.restTimeInSeconds == 1) {
+        if (timerModel.restTimeInSeconds == 1 || timerModel.trainingTimeInSeconds == 1) {
           _playShortBeep();
         }
 
@@ -145,13 +147,8 @@ class TimerDisplay extends StatelessWidget {
     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
-  void _playBeep() async {
-    final player = AudioPlayer();
-    await player.play(AssetSource('beep1.mp3'));
-  }
 
   void _playShortBeep() async {
-    final player = AudioPlayer();
-    await player.play(AssetSource('beep.mp3'));
+    await AudioPlayer().play(AssetSource('beep.mp3'));
   }
 }
