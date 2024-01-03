@@ -5,6 +5,7 @@ import 'timer_model.dart';
 import 'training_page.dart';
 import 'package:wakelock/wakelock.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -34,6 +35,7 @@ class MainPage extends StatelessWidget {
   final TextEditingController _trainingTimeController = TextEditingController();
   final TextEditingController _restTimeController = TextEditingController();
   final TextEditingController _setsController = TextEditingController();
+   
 
   MainPage({super.key});
 
@@ -61,26 +63,17 @@ class MainPage extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   width: 150, // Adjust the width as needed
-                  child: TextField(
+                  child: TextField(               
                     controller: _trainingTimeController,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 30,
                     ),
-                    decoration: const InputDecoration(
-                      labelText: 'Training(seconds)',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      labelStyle: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
+                      decoration: const InputDecoration( 
+                        border: InputBorder.none,
+                        hintText: 'Work seconds',
+                        hintStyle: TextStyle(fontSize: 16,  fontWeight:FontWeight.normal ) 
                     ),
                   ),
                 ),
@@ -97,53 +90,35 @@ class MainPage extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 30,
                     ),
-                    decoration: const InputDecoration(
-                      labelText: 'Breaking(seconds)',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      labelStyle: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
+                    decoration: const InputDecoration( 
+                        border: InputBorder.none,
+                        hintText: 'Rest seconds',
+                        hintStyle: TextStyle(fontSize: 16,  fontWeight:FontWeight.normal) 
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              Center(
+               Center(
                 child: Container(
                   alignment: Alignment.center,
                   width: 150, // Adjust the width as needed
-                  child: TextField(
+                  child: TextField(               
                     controller: _setsController,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 30,
                     ),
-                    decoration: const InputDecoration(
-                      labelText: 'Cycles(times)',
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      labelStyle: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                      ),
+                      decoration: const InputDecoration( 
+                        border: InputBorder.none,
+                        hintText: 'Sets numbers',
+                        hintStyle: TextStyle(fontSize: 16,  fontWeight:FontWeight.normal ) 
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 100),
               Container(
                 alignment: Alignment.center,
                 child: ElevatedButton(
@@ -192,7 +167,7 @@ class MainPage extends StatelessWidget {
                     }
                   },
                   child: const Text(
-                    'Start Training',
+                    'Go To Training',
                     style: TextStyle(
                       color: Colors.white70,
                       fontSize: 20.0,
