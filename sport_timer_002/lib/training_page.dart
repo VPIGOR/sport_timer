@@ -28,17 +28,6 @@ class _TrainingPageState extends State<TrainingPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
-        title: const Text('Training Page'),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: () {
-              Provider.of<TimerModel>(context, listen: false).stopTimer();
-              Navigator.pop(context);
-            },
-          ),
-        ],
       ),
       body: Container(
         color: Colors.blueGrey,
@@ -68,7 +57,7 @@ class _TrainingPageState extends State<TrainingPage> {
                         });
                       }
                     : null,
-                child: const Text('Start'),
+                child: const Text('START'),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
@@ -87,7 +76,7 @@ class _TrainingPageState extends State<TrainingPage> {
                         });
                       }
                     : null,
-                child: const Text('Pause'),
+                child: const Text('STOP'),
               ),
             ],
           ),
@@ -102,7 +91,7 @@ class TimerDisplay extends StatelessWidget {
   final int restTime;
   final int sets;
 
-   const TimerDisplay({
+  const TimerDisplay({
     super.key,
     required this.trainingTime,
     required this.restTime,
@@ -120,10 +109,12 @@ class TimerDisplay extends StatelessWidget {
         Color backgroundColor = timerModel.isTraining
             ? const Color.fromARGB(255, 251, 251, 250)
             : const Color.fromARGB(255, 7, 1, 26);
-            
+
         // Play beep sound in the last two seconds of training and last second of rest
-        if (timerModel.restTimeInSeconds == 1 || timerModel.trainingTimeInSeconds == 1) {
+        if (timerModel.restTimeInSeconds == 1 ||
+            timerModel.trainingTimeInSeconds == 1) {
           _playShortBeep();
+          // beep();
         }
 
         return Container(
@@ -147,8 +138,8 @@ class TimerDisplay extends StatelessWidget {
     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
-
   void _playShortBeep() async {
-    await AudioPlayer().play(AssetSource('beep.mp3'));
+    await AudioPlayer()
+        .play(AssetSource('beep.mp3'), mode: PlayerMode.lowLatency);
   }
 }

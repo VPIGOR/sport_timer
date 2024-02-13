@@ -4,11 +4,22 @@ import 'package:provider/provider.dart';
 import 'timer_model.dart';
 import 'training_page.dart';
 import 'package:wakelock/wakelock.dart';
-
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(const MyApp());
+  
+  // set the audio player to not stop another apps
+  AudioPlayer.global.setAudioContext(
+   const AudioContext(
+      android: AudioContextAndroid(
+        audioFocus: AndroidAudioFocus.none,
+      ),
+    ),
+  );
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -35,7 +46,6 @@ class MainPage extends StatelessWidget {
   final TextEditingController _trainingTimeController = TextEditingController();
   final TextEditingController _restTimeController = TextEditingController();
   final TextEditingController _setsController = TextEditingController();
-   
 
   MainPage({super.key});
 
@@ -43,9 +53,9 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.blueGrey,
         title: const Text(
-          'Interval Timer',
+          'Set Interval Timer',
           style: TextStyle(
             color: Colors.white, // Set the text color
             fontSize: 20.0,
@@ -62,19 +72,19 @@ class MainPage extends StatelessWidget {
               Center(
                 child: Container(
                   alignment: Alignment.center,
-                  width: 150, // Adjust the width as needed
-                  child: TextField(               
+                  width: 200, // Adjust the width as needed
+                  child: TextField(
                     controller: _trainingTimeController,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 30,
                     ),
-                      decoration: const InputDecoration( 
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Work seconds',
-                        hintStyle: TextStyle(fontSize: 16,  fontWeight:FontWeight.normal ) 
-                    ),
+                        hintText: 'Work in seconds',
+                        hintStyle: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.normal)),
                   ),
                 ),
               ),
@@ -82,7 +92,7 @@ class MainPage extends StatelessWidget {
               Center(
                 child: Container(
                   alignment: Alignment.center,
-                  width: 160, // Adjust the width as needed
+                  width: 200, // Adjust the width as needed
                   child: TextField(
                     controller: _restTimeController,
                     keyboardType: TextInputType.number,
@@ -90,31 +100,31 @@ class MainPage extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 30,
                     ),
-                    decoration: const InputDecoration( 
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Rest seconds',
-                        hintStyle: TextStyle(fontSize: 16,  fontWeight:FontWeight.normal) 
-                    ),
+                        hintText: 'Rest in seconds',
+                        hintStyle: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.normal)),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-               Center(
+              Center(
                 child: Container(
                   alignment: Alignment.center,
-                  width: 150, // Adjust the width as needed
-                  child: TextField(               
+                  width: 200, // Adjust the width as needed
+                  child: TextField(
                     controller: _setsController,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 30,
                     ),
-                      decoration: const InputDecoration( 
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Sets numbers',
-                        hintStyle: TextStyle(fontSize: 16,  fontWeight:FontWeight.normal ) 
-                    ),
+                        hintText: 'Sets count',
+                        hintStyle: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.normal)),
                   ),
                 ),
               ),
@@ -125,7 +135,7 @@ class MainPage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     minimumSize:
                         const Size(200, 70), // Set the minimum width and height
-                    backgroundColor: Colors.grey,
+                    backgroundColor: Colors.blueGrey,
                   ),
                   onPressed: () {
                     int trainingTime =
@@ -133,7 +143,7 @@ class MainPage extends StatelessWidget {
                     int restTime = int.tryParse(_restTimeController.text) ?? 0;
                     int sets = int.tryParse(_setsController.text) ?? 0;
 
-                    if (trainingTime > 0 && restTime >= 0 && sets >= 0) {
+                    if (trainingTime > 0 && restTime >= 0 && sets > 0) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -158,7 +168,7 @@ class MainPage extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: const Text('ooOK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -167,7 +177,7 @@ class MainPage extends StatelessWidget {
                     }
                   },
                   child: const Text(
-                    'Go To Training',
+                    'All Set',
                     style: TextStyle(
                       color: Colors.white70,
                       fontSize: 20.0,
